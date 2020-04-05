@@ -1,0 +1,34 @@
+<div class="card" *ngIf="caddy">
+  <div class="card-header"></div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Quantity</td>
+        <td>Prix</td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let item of items|keyvalue">
+        <td>{{item.value.id}}</td>
+        <td>{{item.value.name}}</td>
+        <td>{{item.value.quantity}}</td>
+        <td>{{item.value.price|number:'0.2'}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="removeProductfromCaddy(item.value)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">Total :</td>
+        <td>{{caddyService.totalPrices()|number:'0.2'}}</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-12" *ngIf="caddyService.totalPrices()!=0">
+    <button class="btn btn-success" (click)="onNewOreder()">Commander</button>
+  </div>
+</div>
+

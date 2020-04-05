@@ -1,0 +1,59 @@
+<div class="progress">
+  <div class="progress-bar" role="progressbar"
+       aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
+
+  </div>
+</div>
+<h3>{{this.title}}</h3>
+<div *ngIf="products">
+  <div class="row">
+    <div *ngFor="let p of products._embedded.products">
+        <div class="col-md-5 mt-md-2">
+        <div class="card " style="background:#5B5149;width:400px;border-radius: 10px;">
+          <img class="card-img-top img-thumbnail"
+               (click)="onProductDetails(p)"
+               style="height:300px;border-top-left-radius: 10px;border-top-right-radius:10px;"
+               src="{{this.catService.host+'/photoProduct/'+p.id+'?ts='+getTs()}}"/>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card-title text-light">{{p.name}}</div>
+              </div>
+              <div class="col-md-4 text-warning"><strong>{{p.currentPrice|number:'0.00'}}Dh</strong></div>
+            </div>
+            <div>
+              <span *ngIf="p.promotion">
+                <img src="assets/images/promotion.png" class="img-thumbnail" width="30px" height="20px">
+              </span>
+              <span *ngIf="p.selected">
+                <img src="assets/images/star.png" class="img-thumbnail" width="30px" height="20px">
+              </span>
+              <span *ngIf="p.available">
+                <img src="assets/images/available.png" class="img-thumbnail" width="30px" height="20px">
+              </span>
+            </div>
+            <div>
+              <form #f="ngForm" (ngSubmit)="onAddProductToCaddy(p)">
+                <label class="control-label text-light">Quantité : </label>
+                <input type="number" name="quantite" [(ngModel)]="p.quantity" style="width: 30px;" />
+                <button class="btn btn-outline-dark">
+                  <i class="text-light fa fa-shopping-cart"></i>
+                </button>
+              </form>
+            </div>
+            <div *ngIf="isAdmin()" class="">
+              <p class="text-right">
+                <button class="btn btn-outline-warning" (click)="onEditPhoto(p)"><span class="fa fa-edit"></span>
+                </button>
+              </p>
+              <p *ngIf="editPhoto && currentProduct==p">
+                <input type="file" (change)="onSelectedFile($event)"/>
+                <button class="btn btn-success" (click)="uploadPhoto()"><span class="fa fa-upload"></span></button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

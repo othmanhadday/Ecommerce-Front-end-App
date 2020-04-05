@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4>User Registeration</h4>
+    </div>
+    <div class="col-12">
+      <div class="row" *ngIf="authError">
+        <div class="col-12 alert alert-danger">
+          {{authError}}
+        </div>
+      </div>
+      <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm.value)">
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label>Full Name</label>
+            <input type="text" name="name" ngModel class="form-control">
+          </div>
+          <div class="col-md-6 mb-2">
+            <label>UserName</label>
+            <input type="text" name="username" ngModel class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <label>Email</label>
+            <input type="email" name="email" ngModel class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <label>Password</label>
+            <input type="password" name="password" ngModel class="form-control">
+            <p *ngIf="pwdError" class="text-danger">{{pwdError}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <label>Confirm Password</label>
+            <input type="password" name="confirmPassword" ngModel class="form-control">
+              <p *ngIf="pwdError" class="text-danger">{{pwdError}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-11">
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
+          <button routerLink="/login" class="btn btn-outline-info text-right">login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

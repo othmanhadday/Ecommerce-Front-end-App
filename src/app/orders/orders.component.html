@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">Orders</div>
+  <div class="card-body">
+    <table class="table table-striped" *ngIf="orders">
+      <tr>
+        <td># ID</td>
+        <td>Date de commande</td>
+        <td *ngIf="authenticationService.isAdmin()">utilisateur</td>
+        <td>client</td>
+        <td>Payée</td>
+        <td>Total Amount</td>
+        <td></td>
+      </tr>
+      <tbody *ngFor="let o of orders">
+      <tr>
+        <td>{{o.id}}</td>
+        <td>{{o.date}}</td>
+        <td *ngIf="authenticationService.isAdmin()">{{o.client.username}}</td>
+        <td>{{o.client?.name}}</td>
+        <div *ngIf="o.payment">
+          <td>Payee</td>
+        </div>
+        <div *ngIf="o.payment==undefined">
+          <td>Not Payee</td>
+        </div>
+        <td>{{o.totalAmount}}Dh</td>
+        <td (click)="AffichelistProduct(o.id)"><i class="fa fa-flickr"></i></td>
+      </tr>
+      <tr *ngIf="idActve==o.id">
+        <td></td>
+        <td>ID</td>
+        <td>Product name</td>
+        <td>quantite</td>
+        <td>price</td>
+      </tr>
+      <tr *ngFor="let pi of o.products">
+        <td *ngIf="idActve==o.id"></td>
+        <td *ngIf="idActve==o.id">{{pi.id}}</td>
+        <td *ngIf="idActve==o.id">{{pi.name}}</td>
+        <td *ngIf="idActve==o.id">{{pi.quantity}}</td>
+        <td *ngIf="idActve==o.id">{{pi.price}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

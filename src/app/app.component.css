@@ -1,0 +1,7 @@
+.clickable{
+  cursor: pointer;
+}
+.fix{
+  width: auto !important;
+  align-content: start !important;
+}
